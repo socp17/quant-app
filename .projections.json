@@ -1,0 +1,8 @@
+{
+  "src/client/assets/javascripts/*.js": {
+    "alternate": "test/unit/{}.spec.js"
+  },
+  "test/unit/*.js": {
+    "alternate": "src/client/assets/javascripts/{}.spec.js"
+  }
+}
