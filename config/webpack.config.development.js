@@ -4,7 +4,8 @@ const config = require('./webpack.config.base');
 
 const GLOBALS = {
   'process.env': {
-    'NODE_ENV': JSON.stringify('development')
+    'NODE_ENV': JSON.stringify('development'),
+    'BACKEND_URI': JSON.stringify(process.env.BACKEND_URI || 'http://localhost:9000'),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'true'))
 };

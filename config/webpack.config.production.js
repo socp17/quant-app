@@ -5,9 +5,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('./webpack.config.base');
 
+if (!process.env.BACKEND_URI) {
+  throw new Error('BACKEND_URI was not set before build');
+}
+
 const GLOBALS = {
   'process.env': {
-    'NODE_ENV': JSON.stringify('production')
+    'NODE_ENV': JSON.stringify('production'),
+    'BACKEND_URI': JSON.stringify(process.env.BACKEND_URI),
   },
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 };

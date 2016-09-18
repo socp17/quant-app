@@ -1,4 +1,4 @@
-const rootUrl = 'http://localhost:9000';
+const rootUrl = process.env.BACKEND_URI;
 const url = (uri) => `${rootUrl}/${uri}`;
 
 function checkStatus(json) {
