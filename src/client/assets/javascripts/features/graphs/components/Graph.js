@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Plotly from 'common/plotly';
-import { cloneDeep } from 'lodash';
 
 export default class Graph extends Component {
   static propTypes = {
@@ -15,6 +14,7 @@ export default class Graph extends Component {
   }
 
   componentDidUpdate() {
+    console.info('updating!');
     this.plot(this.props.data);
   }
 
@@ -29,20 +29,26 @@ export default class Graph extends Component {
   plot(data) {
     const layout = {
       margin: {
-        t: 0,
+        t: 20,
+        b: 20,
+        l: 40,
+        r: 20,
       },
     };
 
     const options = {
-      displayModeBar: false,
+      // displayModeBar: false,
     };
 
-    Plotly.newPlot(this.node, cloneDeep(data), layout, options);
+    Plotly.newPlot(this.node, data, layout, options);
   }
 
   render() {
     return (
-      <div ref={(node) => this.node = node} />
+      <div
+        ref={(node) => this.node = node}
+        style={{ height: 400 }}
+      />
     );
   }
 }

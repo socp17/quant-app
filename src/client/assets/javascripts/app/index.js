@@ -4,12 +4,18 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 import Redbox from 'redbox-react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 import Root from './Root';
 import configureStore from './store/configureStore';
 
-import 'styles/bootstrap.min.css';
 import 'styles/styles.scss';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css'
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);

@@ -11,6 +11,22 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case 'INPUT_SET': {
+      const match = action.payload.id.match(/graph(\d+)\./);
+      if (match) {
+        const graphId = match[1];
+        return {
+          ...state,
+          [graphId]: {
+            ...state[graphId],
+            isInvalidated: true,
+          },
+        };
+      } else {
+        return state;
+      }
+    }
+
     case 'FETCH_GRAPH': {
       switch (action.status) {
         case 'error': return {
@@ -18,7 +34,8 @@ export default function reducer(state = initialState, action) {
           [action.payload.id]: {
             isFetching: false,
             isInvalidated: false,
-            error: action.payload.data,
+            error: action.payload.error,
+            trace: action.payload.error.trace,
           }
         };
 

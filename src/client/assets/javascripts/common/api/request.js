@@ -2,14 +2,15 @@ const rootUrl = 'http://localhost:9000';
 const url = (uri) => `${rootUrl}/${uri}`;
 
 function checkStatus(json) {
-  if (json.error) throw json.error;
+  if (!json.ok) throw json.error;
   return json.result;
 }
 
 export function get(uri) {
   return global.fetch(url(uri))
     .then((response) => response.json())
-    .then(checkStatus);
+    .then(checkStatus)
+    .catch(e => { throw e });
 }
 
 export function post(uri, data) {
@@ -25,7 +26,8 @@ export function post(uri, data) {
 
   return global.fetch(url(uri), options)
     .then((response) => response.json())
-    .then(checkStatus);
+    .then(checkStatus)
+    .catch(e => { throw e });
 }
 
 export default {

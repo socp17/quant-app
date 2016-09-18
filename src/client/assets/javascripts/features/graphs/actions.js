@@ -1,7 +1,7 @@
 import { getScatter } from 'common/api';
 
-export const fetchScatter = ({ x, y, z }) => (dispatch) => {
-  getScatter({ x, y, z })
+export const fetchScatter = ({ x, y, z, start, end }) => (dispatch) => {
+  getScatter({ x, y, z, start, end })
     .then((result) => {
       dispatch({
         type: 'FETCH_GRAPH',
@@ -13,6 +13,7 @@ export const fetchScatter = ({ x, y, z }) => (dispatch) => {
       });
     })
     .catch((e) => {
+      console.error(e && e.stack);
       dispatch({
         type: 'FETCH_GRAPH',
         status: 'error',
@@ -28,6 +29,7 @@ export const fetchScatter = ({ x, y, z }) => (dispatch) => {
     status: 'pending',
     payload: {
       id: 1,
+      params: { x, y, z, start, end },
     },
   });
 }

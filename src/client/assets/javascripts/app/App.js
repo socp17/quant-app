@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react';
+import Theme from 'components/Theme';
+import AppBar from 'material-ui/AppBar';
 
 const App = (props) => (
-  <div className="page-container">
-    {React.cloneElement({...props}.children, {...props})}
-  </div>
+  <Theme>
+    <AppBar title="Quant" />
+    <div>
+      {React.cloneElement({...props}.children, {...props})}
+    </div>
+  </Theme>
 );
 
 App.propTypes = {
